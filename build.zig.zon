@@ -1,0 +1,7 @@
+.{
+    .name = .aoc,
+    .version = "0.0.1",
+    .minimum_zig_version = "0.15.1",
+    .paths = .{""},
+    .fingerprint = 0x808a3f8f5086bb4b,
+}
