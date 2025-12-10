@@ -1,3 +1,5 @@
 const std = @import("std");
 
-test {}
+test {
+    _ = @import("2025/day1/main.zig");
+}
