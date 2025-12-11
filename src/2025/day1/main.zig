@@ -3,8 +3,9 @@
 //! | .. |              | .. |
 //! | 52 | 51 | 50 | 49 | 48 |
 const std = @import("std");
+const InputReader = @import("../../InputReader.zig");
 
-fn sovle(input: *std.mem.SplitIterator(u8, .scalar)) !usize {
+fn sovle(input: *std.mem.SplitIterator(u8, .sequence)) !usize {
     var point: isize = 50;
     var count_zero: usize = 0;
 
@@ -41,24 +42,14 @@ fn sovle(input: *std.mem.SplitIterator(u8, .scalar)) !usize {
 
 test "(2025) solved" {
     const alloc = std.testing.allocator;
-    const test_input = try std.fs.cwd().readFileAlloc(
-        alloc,
-        "src/2025/day1/test_input.txt",
-        1024,
-    );
-    defer alloc.free(test_input);
-    var iter1 = std.mem.splitScalar(u8, test_input, '\n');
+    var input_reader: InputReader = try .init(alloc);
+    defer input_reader.deinit();
 
+    var iter1 = try input_reader.read("src/2025/day1/test_input.txt", "\n");
     const result1 = try sovle(&iter1);
     try std.testing.expectEqual(3, result1);
 
-    const input = try std.fs.cwd().readFileAlloc(
-        alloc,
-        "src/2025/day1/input.txt",
-        1024 * 1024, // 1mb
-    );
-    defer alloc.free(input);
-    var iter2 = std.mem.splitScalar(u8, input, '\n');
+    var iter2 = try input_reader.read("src/2025/day1/input.txt", "\n");
     const result2 = try sovle(&iter2);
     try std.testing.expectEqual(1120, result2);
 }
