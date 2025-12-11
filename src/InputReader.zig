@@ -3,6 +3,8 @@ const std = @import("std");
 const Allocator = std.mem.Allocator;
 const ArenaAllocator = std.heap.ArenaAllocator;
 
+pub const InputType = std.mem.SplitIterator(u8, .sequence);
+
 output: ?[]const u8 = null,
 _alloc: Allocator,
 
@@ -26,10 +28,7 @@ pub fn read(
     self: @This(),
     input_path: []const u8,
     comptime delimiter: []const u8,
-) !std.mem.SplitIterator(
-    u8,
-    .sequence,
-) {
+) !InputType {
     const input = try std.fs.cwd().readFileAlloc(
         self._alloc,
         input_path,

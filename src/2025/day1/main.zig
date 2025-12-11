@@ -4,8 +4,9 @@
 //! | 52 | 51 | 50 | 49 | 48 |
 const std = @import("std");
 const InputReader = @import("../../InputReader.zig");
+const InputType = InputReader.InputType;
 
-fn sovle(input: *std.mem.SplitIterator(u8, .sequence)) !usize {
+fn sovle(input: *InputType) !usize {
     var point: isize = 50;
     var count_zero: usize = 0;
 
@@ -40,7 +41,7 @@ fn sovle(input: *std.mem.SplitIterator(u8, .sequence)) !usize {
     return count_zero;
 }
 
-test "(2025) solved" {
+test "(2025/day1) solved" {
     const alloc = std.testing.allocator;
     var input_reader: InputReader = try .init(alloc);
     defer input_reader.deinit();
